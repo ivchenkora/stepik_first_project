@@ -11,7 +11,7 @@ def browser(request):
     browser = None
     if language == "en":
         print("\nstart en language for test..")
-        link = "http://selenium1py.pythonanywhere.com/"
+        link = "http://selenium1py.pythonanywhere.com/ru/accounts/login/"
         browser = webdriver.Chrome()
         browser.get(link)
     elif language == "ru":
