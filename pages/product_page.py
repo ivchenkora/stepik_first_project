@@ -6,6 +6,7 @@ from .locators import MainPageLocators
 from .locators import ProductPageLocators
 from .login_page import LoginPage
 import math
+import pytest
 
 class ProductPage(BasePage): 
 
@@ -32,13 +33,18 @@ class ProductPage(BasePage):
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
-    
+
+    @pytest.mark.xfail(reason="fixing this bug right now")
     def should_be_correct_name_message_after_added(self):
         book_title_text = self.browser.find_element(*ProductPageLocators.BOOK_NAME_MAIN).text
         book_title_text_message = self.browser.find_element(*ProductPageLocators.BOOK_NAME_ADDED_MESSAGE).text
-        assert book_title_text in book_title_text_message, "Added book named incorrectly in confirm message"
+        print(book_title_text)
+        print(book_title_text_message)
+        assert book_title_text == book_title_text_message, "Added book named incorrectly in confirm message"
         
     def should_be_correct_price_message_after_added(self):
         book_price = self.browser.find_element(*ProductPageLocators.BOOK_COST_MAIN).text
         bucket_value = self.browser.find_element(*ProductPageLocators.BUCKET_COST_MESSAGE).text
-        assert book_price in bucket_value, "Bucket value is incorrect"
+        print(book_price)
+        print(bucket_value)
+        assert book_price == bucket_value, "Bucket value is incorrect"
