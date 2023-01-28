@@ -11,14 +11,14 @@ def browser(request):
     browser = None
     if language == "en":
         print("\nstart en language for test..")
-        #link = "http://selenium1py.pythonanywhere.com/ru/accounts/login/"
+        #link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
         browser = webdriver.Chrome()
         #browser.get(link)
     elif language == "ru":
         print("\nstart ru language for test..")
-        link = "http://selenium1py.pythonanywhere.com/ru/catalogue/coders-at-work_207/"
+        #link = "http://selenium1py.pythonanywhere.com/ru/catalogue/coders-at-work_207/"
         browser = webdriver.Chrome()
-        browser.get(link)
+        #browser.get(link)
     else:
         raise pytest.UsageError("--this language was not found")
     yield browser

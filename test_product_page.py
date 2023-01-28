@@ -8,7 +8,7 @@ from .pages.locators import MainPageLocators
 from .pages.locators import LoginPageLocators
 from .pages.locators import ProductPageLocators
 
-
+"""
 @pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",
                                   "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1",
                                   "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer2",
@@ -25,3 +25,26 @@ def test_guest_can_add_product_to_basket(browser, link):
     page = ProductPage(browser, link)                   # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
     page.open()                                         # открываем страницу
     page.should_be_properly_added_to_basket()           # выполняем метод
+"""
+
+def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+    page = ProductPage(browser, link)                   # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
+    page.open()                                         # открываем страницу
+    page.press_add_to_basket()
+    page.should_not_see_success_message_after_adding_product_to_basket()
+    
+    
+def test_guest_cant_see_success_message(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+    page = ProductPage(browser, link)                   # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
+    page.open()                                         # открываем страницу
+    page.should_not_see_success_message()           # выполняем метод
+    
+def test_message_disappeared_after_adding_product_to_basket(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+    page = ProductPage(browser, link)                   # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
+    page.open()                                         # открываем страницу
+    page.press_add_to_basket()
+    page.should_message_disappeared_after_adding_product_to_basket()
+    
