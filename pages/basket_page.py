@@ -3,24 +3,14 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from .locators import BasePageLocators
-from .locators import MainPageLocators
+from .locators import BasketPageLocators
 
 
-class BasePage():
+class BasketPage():
     def __init__(self, browser, url, timeout=10):
         self.browser = browser
         self.url = url
         self.browser.implicitly_wait(timeout)
-        
-    def go_to_login_page(self):
-        link = self.browser.find_element(*BasePageLocators.LOGIN_LINK_INVALID)
-        link.click()
-
-    def should_be_login_link(self):
-        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
-
-    def open(self): 
-        self.browser.get(self.url)
         
     def is_element_present(self, how, what):
         try:
@@ -46,7 +36,12 @@ class BasePage():
 
         return True
         
-    def press_view_basket(self):
-        button = self.browser.find_element(*MainPageLocators.VIEW_BASKET_FORM)
-        button.click()
+    def should_not_see_products_in_basket(self):
+        assert self.is_not_element_present(*BasketPageLocators.ITEMS_FORM), \
+            "Success message is presented, but should not be"
+    
+    def should__see_basket_is_empty_message(self):
+        assert self.is_element_present(*BasketPageLocators.TEXT_IF_EMPTY), \
+            "Success message is presented, but should not be"
+        
         
