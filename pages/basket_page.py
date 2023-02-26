@@ -38,10 +38,10 @@ class BasketPage():
         
     def should_not_see_products_in_basket(self):
         assert self.is_not_element_present(*BasketPageLocators.ITEMS_FORM), \
-            "Success message is presented, but should not be"
+            "Product is presented, but should not be"
     
     def should__see_basket_is_empty_message(self):
-        assert self.is_element_present(*BasketPageLocators.TEXT_IF_EMPTY), \
-            "Success message is presented, but should not be"
+        basket_text = self.browser.find_element(*BasketPageLocators.TEXT_IF_EMPTY)
+        assert basket_text.text == "Your basket is empty. Continue shopping", "Basket isn't empty"
         
         
